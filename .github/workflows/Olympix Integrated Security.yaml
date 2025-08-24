@@ -13,8 +13,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Run Olympix Security Scanner
+      - name: Debug & Run Olympix Security Scanner
         uses: olympix/integrated-security@v0.1.0
         with:
-          entryPoint: 'npx hardhat compile'
-          args: '--contracts ./contracts/**/*.sol --severity high --report json'
+          entryPoint: 'bash -c "echo Running: npx hardhat compile && npx hardhat compile"'
+          args: '--contracts=./contracts/**/*.sol --severity=high --report=json'

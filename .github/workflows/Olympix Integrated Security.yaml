@@ -1,4 +1,4 @@
-name: Olympix Integrated Security
+name: Olympix Security Scan
 
 on:
   push:
@@ -13,13 +13,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
       - name: Run Olympix Security Scanner
         uses: olympix/integrated-security@v0.1.0
         with:
-          entryPoint: './contracts'
-          args: '--severity high --report json'
+          entryPoint: 'npx hardhat compile'
+          args: '--contracts ./contracts/**/*.sol --severity high --report json'

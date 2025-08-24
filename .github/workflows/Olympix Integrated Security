@@ -1,0 +1,2 @@
+- name: Olympix Integrated Security
+  uses: olympix/integrated-security@v0.1.0

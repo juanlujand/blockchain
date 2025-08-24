@@ -1,0 +1,40 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  olympix-security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+         cd frontend
+         npm install
+
+      - name: Debug entryPoint
+        run: |
+          echo "Running entryPoint: npx hardhat compile"
+
+      - name: Run Olympix Security Scanner
+        uses: olympix/integrated-security@v0.1.0
+        with:
+          entryPoint: 'npx hardhat compile'
+          args: '--contracts=./contracts/**/*.sol --severity=high --report=json'
+
+      - name: Upload security report
+        uses: actions/upload-artifact@v4
+        with:
+          name: olympix-security-report
+          path: olympix-report.json

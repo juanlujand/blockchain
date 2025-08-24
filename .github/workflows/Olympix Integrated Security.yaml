@@ -16,5 +16,7 @@ jobs:
       - name: Debug & Run Olympix Security Scanner
         uses: olympix/integrated-security@v0.1.0
         with:
-          entryPoint: 'bash -c "echo Running: npx hardhat compile && npx hardhat compile"'
-          args: '--contracts=./contracts/**/*.sol --severity=high --report=json'
+          entryPoint: bash
+          args: >
+             -c "echo 'Running entryPoint: npx hardhat compile' &&
+              npx hardhat compile --contracts ./contracts/**/*.sol --severity high --report json"

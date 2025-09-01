@@ -1,38 +1,22 @@
-name: Security Scan
+name: Security Review
+
+permissions:
+  pull-requests: write  # Needed for leaving PR comments
+  contents: read
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
 
 jobs:
-  olympix-security-scan:
+  security:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
         with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Debug entryPoint
-        run: |
-          echo "Running entryPoint: npx hardhat compile"
-
-      - name: Run Olympix Security Scanner
-        uses: olympix/integrated-security@v0.1.0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 2
+      
+      - uses: anthropics/claude-code-security-review@main
         with:
-          entryPoint: 'npx hardhat compile'
-          args: '--contracts=./contracts/**/*.sol --severity=high --report=json'
-
-      - name: Upload security report
-        uses: actions/upload-artifact@v4
-        with:
-          name: olympix-security-report
-          path: olympix-report.json
+          comment-pr: true
+          claude-api-key: ${{ secrets.CLAUDE_API_KEY }}

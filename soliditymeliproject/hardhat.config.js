@@ -1,17 +1,43 @@
-// hardhat.config.js
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 
 module.exports = {
-  networks: {
-    polygon: {
-      url: "https://polygon-rpc.com/",
-      accounts: [process.env.PRIVATE_KEY],
-    },
-    mumbai: {
-      url: "https://rpc-mumbai.maticvigil.com/",
-      accounts: [process.env.PRIVATE_KEY],
+  solidity: {
+    version: "0.8.20",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
     },
   },
-  solidity: "0.8.20",
+  networks: {
+    sepolia: {
+      url: process.env.SEPOLIA_RPC_URL || "https://rpc.sepolia.dev", // Fallback to public RPC
+      chainId: 11155111,
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      gasPrice: "auto",
+    },
+  },
+  etherscan: {
+    apiKey: {
+      sepolia: process.env.ETHERSCAN_API_KEY || "your-etherscan-api-key",
+    },
+    customChains: [
+      {
+        network: "sepolia",
+        chainId: 11155111,
+        urls: {
+          apiURL: "https://api-sepolia.etherscan.io/api",
+          browserURL: "https://sepolia.etherscan.io",
+        },
+      },
+    ],
+  },
+  paths: {
+    sources: "./contracts",
+    tests: "./test",
+    cache: "./cache",
+    artifacts: "./artifacts",
+  },
 };

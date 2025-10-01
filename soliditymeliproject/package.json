@@ -50,7 +50,7 @@
     "asynckit": "^0.4.0",
     "at-least-node": "^1.0.0",
     "available-typed-arrays": "^1.0.7",
-    "axios": "^1.11.0",
+    "axios": "^1.12.2",
     "balanced-match": "^1.0.2",
     "base-x": "^3.0.11",
     "binary-extensions": "^2.3.0",

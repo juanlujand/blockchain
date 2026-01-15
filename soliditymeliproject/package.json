@@ -346,7 +346,7 @@
     "typescript": "^5.9.2",
     "typical": "^4.0.0",
     "uglify-js": "^3.19.3",
-    "undici": "^5.29.0",
+    "undici": "^6.23.0",
     "undici-types": "^7.10.0",
     "universalify": "^2.0.1",
     "unpipe": "^1.0.0",

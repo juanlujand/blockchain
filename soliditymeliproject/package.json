@@ -211,7 +211,7 @@
     "kleur": "^3.0.3",
     "levn": "^0.3.0",
     "locate-path": "^6.0.0",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "lodash.camelcase": "^4.3.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.isequal": "^4.5.0",
